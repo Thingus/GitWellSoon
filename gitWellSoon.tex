@@ -8,6 +8,11 @@
 \usepackage{wrapfig} %for sidebars
 \usepackage{tabularx} %for tables
 
+\usepackage[noheadfoot,margin=1in]{geometry}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+
+
 %Environment packages
 \usepackage{graphicx} %for images
 \usepackage{tcolorbox} %for background colours
@@ -16,6 +21,74 @@
 \usepackage{todonotes} %for keeping track
 \usepackage[l2tabu, orthodox]{nag} %forces LaTeX commands
 
+%Environments
+
+\newenvironment{wrapbox}[1][r]
+	{\wrapfigure{#1}{0.35\textwidth}\tcolorbox}
+	{\endtcolorbox\endwrapfigure}
+
+
+
 \begin{document}
 
+\title{Git Well Soon: a crash course in version control}
+
+\maketitle
+
+Ciaran has a set of SAR tools he is maintaining using a Github source code repository; [LINK] Here’s how you can get that code for your own use, make any changes you feel are needed and share it with anyone else who would require it.
+
+\underline{What is Git?}
+
+Git is a way of managing and keeping track of a piece of software’s history – who made what change when. It is also a way combining code from multiple developers together into a single piece of software, while still keeping track of who did what.
+
+\underline{Installing Git}
+
+If you're on Windows, then you can install Git for Windows via the University’s Program Installer. If you're on an Ubuntu or other Linux machine, then Git is usually pre-installed. If not, then you can install it with
+
+\begin{verbatim}
+$ sudo apt-get install git-all
+\end{verbatim}
+
+on the command line.
+
+\begin{wrapbox}
+From here out, it’s assuming that you are using a standard Bash terminal for navigation. If you are on Windows, a good enough emulation comes with Git for Windows; just type ‘Git Bash’ into the search bar.
+\end{wrapbox}
+
+\begin{wrapbox}
+If you’re not familiar with using a terminal to navigate, all you need for this session are the following commands: \verb|$cd [folder]| will move you into [folder]; \verb|$cd ..| will move you up to the parent folder; \verb|$ls| will show files in the current folder; and \verb|mkdir [name]| will create a new directory called [name].
+\end{wrapbox}
+
+\underline{Getting the code}
+
+First, navigate to a convenient directory using cd and mkdir, as appropriate. Once there:
+
+\begin{verbatim}
+
+$git clone [LINK]
+
+\end{verbatim}
+
+This is now the \textbf{root} of your local repository – as far as Git is concerned, everything is relative to this point.
+
+\missingfigure{diagram of clone}
+
+\underline{What is happening here}
+
+This will copy all of Ciaran’s code from Github to your machine into a \textbf{local repository}, complete with the history and branches [see later] of his project right to the beginning – you can view this with the command \verb|$ git log|. Press ‘q’ to exit the log viewer.
+
+\underline{Why do this?}
+
+As well as getting the entire project’s codebase, when you cloned the repository with \verb|$ git clone|, you also cloned its history and configuration. This means that you can:
+
+\begin{itemize}
+\item Keep it up to date with any revisions Ciaran might make in the future
+\item Review any changes he might have made in the past, and understand why he made those changes.
+\item If you make a huge, unfixable mistake, or if the code was working last Tuesday and isn’t now, you can roll the entire project back to a point where everything was working
+\item Fix any bugs or glitches you might find
+\item Add any further features that you think the code might need, and share those features with anyone else.
+\end{itemize}
+
+
 \end{document}
+

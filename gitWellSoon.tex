@@ -16,6 +16,7 @@
 %Environment packages
 \usepackage{graphicx} %for images
 \usepackage{tcolorbox} %for background colours
+\usepackage{hyperref} %for URLs
 
 %usability packages
 \usepackage{todonotes} %for keeping track
@@ -89,6 +90,55 @@ As well as getting the entire project’s codebase, when you cloned the reposito
 \item Add any further features that you think the code might need, and share those features with anyone else.
 \end{itemize}
 
+\underline{Keeping the code up-to-date}
+
+Whenever Ciaran or anyone else makes a change or adds a new feature, you can easily update his code on your own machine with this command:
+
+\begin{verbatim}
+$git pull
+\end{verbatim}
+
+You should now see a short summary of what has been changed; you can get more information using the command \verb|git diff|, or see the later section on using graphical tools.
+
+\textbf{IF YOU DO NOT WISH TO EDIT ANY CODE, YOU CAN STOP HERE.}
+
+\underline{Editing code of your own}
+
+Let’s say you wanted to add a function to Ciaran’s codebase. You’ve written the script – let’s call it [newthing] – in a file of its own (\verb|newthing.py|), and now you want to add it to Ciaran’s repository so everyone else can use it. This process has a few steps.
+
+\begin{enumerate}
+\item Put newthing.py in a sensible place in your local repository using a file manager. You can check it’s there with \verb|$git status|
+As you might gather from the status message, Git does not know that you want to add newthing.py to the repository.
+\item Use the command
+\begin{verbatim}
+$git add FILEPATH
+\end{verbatim}
+where \verb|FILEPATH| is the path from the root of your local repository. If in doubt, use the message that git status gives you.
+
+This adds newthing.py to your staging area. This is where any changes you make are stored until you commit them to your local repository in the next step. Once a file is added to your staging area, it will stay there until deleted or explicitly removed; you do not need to keep [add]ing it.
+
+\item Commit the changes to your local repository with the command
+\begin{verbatim}
+$git commit –m “some informative message here”
+\end{verbatim}
+The message you write in here is what will appear when anyone runs “git log”, so make sure it’s informative and clean(ish)
+\begin{wrapbox} 
+If you forget the –m option, by default Git will open vim; a powerful but non-intuitive text editor. To exit Vim, press ‘esc’ then type ‘:q!’ without the quotes. If you want to learn Vim, clear an hour in your schedule and run ‘vimtutor’ from the command line.
+\end{wrapbox}
+\begin{wrapbox} When to commit “Early and often” is the mantra from the community; the smaller each commit is, the more powerful the ‘time-travel’ tools below become. Find a commit pace that works for you, but if in doubt more often is usually better.
+\end{wrapbox}
+This commits snapshots of your code to your local repository; 
+\item Continue to edit and \verb|git commit| your code, using [add] to add new files as required. Bear in mind none of these changes will go to Ciaran’s repository yet.
+\item Once you are happy with your new feature and are reasonably sure that it doesn’t break anything else, use the command
+\begin{verbatim}
+$git push origin master
+\end{verbatim}
+to put your changes into Cieron’s repository. You might be prompted for your Github username and password here.
+\end{enumerate}
+
+\begin{wrapbox} 
+When you're doing a large commit (such as adding a new feature to a repo), it’s good to write a longer commit message using a text editor – the default is Vim, but you can change this using the command git config –global core.editor [editor]. For a quick guide to writing useful commit messages, see \url{https://chris.beams.io/posts/git-commit/}.
+\end{wrapbox}
 
 \end{document}
 

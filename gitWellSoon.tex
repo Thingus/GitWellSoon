@@ -24,9 +24,15 @@
 
 %Environments
 
-\newenvironment{wrapbox}[1][r]
-	{\wrapfigure{#1}{0.35\textwidth}\tcolorbox}
-	{\endtcolorbox\endwrapfigure}
+\newenvironment{wrapbox}
+	{
+		\begin{wrapfigure}{R}{0.3\textwidth}
+		\begin{tcolorbox}
+	}
+	{
+		\end{tcolorbox}
+		\end{wrapfigure}
+	}
 
 
 
@@ -119,7 +125,7 @@ This adds newthing.py to your staging area. This is where any changes you make a
 
 \item Commit the changes to your local repository with the command
 \begin{verbatim}
-$git commit –m “some informative message here”
+$git commit –m "some informative message here"
 \end{verbatim}
 The message you write in here is what will appear when anyone runs “git log”, so make sure it’s informative and clean(ish)
 \begin{wrapbox} 
@@ -131,7 +137,7 @@ This commits snapshots of your code to your local repository;
 \item Continue to edit and \verb|git commit| your code, using [add] to add new files as required. Bear in mind none of these changes will go to Ciaran’s repository yet.
 \item Once you are happy with your new feature and are reasonably sure that it doesn’t break anything else, use the command
 \begin{verbatim}
-$git push origin master
+$git push
 \end{verbatim}
 to put your changes into Cieron’s repository. You might be prompted for your Github username and password here.
 \end{enumerate}
@@ -139,6 +145,48 @@ to put your changes into Cieron’s repository. You might be prompted for your G
 \begin{wrapbox} 
 When you're doing a large commit (such as adding a new feature to a repo), it’s good to write a longer commit message using a text editor – the default is Vim, but you can change this using the command git config –global core.editor [editor]. For a quick guide to writing useful commit messages, see \url{https://chris.beams.io/posts/git-commit/}.
 \end{wrapbox}
+
+\underline{Branching}
+
+It is a sad fact that when working on improving a piece of code, you will almost certainly break it or something else instead. To avoid this and the associated recriminations, Git allows you to make local timelines of the project that you can mess around with as you please, without affecting anyone else’s work. These local timelines are called ‘branches’.
+
+By convention, each Git repository starts with a branch called ‘master’. Once the initial code repository is written, this is usually the 'this code works' branch – anyone wanting to use Cieran’s tools will use the code stored in ‘master’. 
+
+\textbf{It is good practice whenever you are writing a new feature to create a branch to develop it in.} This way, others can still use the original version of the program and also contribute to your improved version, and you can test your new features without having to worry about breaking the software for everyone.
+
+To create a new branch, use the command
+
+\begin{verbatim}
+$git branch [branchname]
+\end{verbatim}
+
+to  create the branch, and the command
+
+\begin{verbatim}
+$git checkout [branchname]
+\end{verbatim}
+
+to start work in the new branch. As long as you have commited your work, you can move between branches with the \verb|$git checkout| command and see the difference between them with \verb|$git diff [branch1] [branch2]|.
+
+This branch is in your \textbf{local repository}. If you \verb|$ git push| while you’re working in a branch, Git will add that branch to the \textbf{remote repository} for others to access.
+
+\underline{Merging}
+
+Merging is when you take the changes made in one branch and apply them to another branch. Git is very smart about this, and changes are done more or less line-by-line - even if two people are working on different parts of the same file in different branches, Git can collate those changes without user input (but see the next section). There are two situations where you need to merge regularly;
+
+\begin{itemize}
+\item \underline{When you have finished work on a branch:} You will want to merge your shiny new feature into the ‘master’ branch, so everyone can use it. To do this, first make sure you have \verb|$ git commit|ed your changes to your branch. Then, move to the ‘master’ branch using
+\begin{verbatim}
+$git checkout master
+\end{verbatim}
+Once there, use the command
+\begin{verbatim}
+$ git merge [branchname]
+\end{verbatim}
+
+This will bring the changes out have made in [branchname] into the 'master' branch; you can then push that branch to the remote repository using \verb|$ git push|.
+
+
 
 \end{document}
 

@@ -249,6 +249,7 @@ NOTE: This does not work back through the history; it only undoes the changes ma
 If you prefer something you can click on, rin \verb|$ gitk| on the command line. This will open up a history viewer for the repo you are presently in. There is also a full GUI for controlling Git included in the Windows distribution; most of the commands here you can do via that, if you prefer.
 
 \underline{Acknowledgements and further reading}
+
 Most of the content of this guide came from Pro Git, by Scott Chacon and Ben Straub. The whole book is available for free here:\url{ https://git-scm.com/book/en/v2}. I recommend reading through chapters 2 and 3 (especially 3.5), and sections 7.1, 7.2 and 7.3. Remember, the arrows in the diagrams point backwards in time.
 
 You can also work through an online introduction to Git at \url{https://try.github.io}.
@@ -258,10 +259,32 @@ As mentioned above, I also recommend you read \url{https://chris.beams.io/posts/
 \underline{Some last words to remember}
 
 \begin{itemize}
-\item Always $commit before you $pull
-\item Always $pull before you $push
+\item Always \verb|$ git commit| before you \verb|$git pull|
+\item Always \verb|$ git pull| before you \verb|$git push|
 \item Never use any command with --force unless you’re \textit{absolutely sure} you know what you are doing. Even if the Internet says otherwise.
+\end{itemize}
 
+\underline{Quick reference table}
+
+\begin{tabular}[c]{|p{0.4\textwidth}|p{0.6\textwidth}|}
+\hline
+\textbf{When you want to...} & \textbf{Use the commands...} \\ \hline
+Add a new code repository & \verb|$git clone [repo URL]| \\ \hline
+Get any changes made to that code & \verb|$git pull| \\ \hline
+View those changes & \verb|$git log| \\ \hline
+Check what files you've changed since your last commit & \verb|$git log| \\ \hline
+Add a new file to your local repo &
+\verb|$git add [files]| \\
+&\verb|$git status| \\
+&\verb|$git commit -m 'Some informative message'| \\ \hline
+Branch the repo to start work on a new feature &
+\verb|$git branch [branchname]| \\& \verb|$git checkout [branchname]| \\ \hline
+Merge changes from another branch & \verb|$git merge [otherbranch]| \\ \hline
+Move a file back to it's last commit (LOSING ANY CHANGES YOU'VE MADE SINCE THEN) & \verb|$git checkout -- [filename]| \\ \hline
+Rewind the entire project back to a certain revision & \verb|$git checkout [hash]| \\ \hline
+Create a new commit that undoes any changes made in commit[hash] & \verb|$git revert [hash]| \\ \hline
+
+\end{tabular}
 
 \end{document}
 

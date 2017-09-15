@@ -26,12 +26,12 @@
 
 \newenvironment{wrapbox}
 	{
-		\begin{wrapfigure}{!}{0.3\textwidth}
+		%\begin{wrapfigure}{#1}{0.5\textwidth}
 		\begin{tcolorbox}
 	}
 	{
 		\end{tcolorbox}
-		\end{wrapfigure}
+		%\end{wrapfigure}
 	}
 
 
@@ -42,15 +42,21 @@
 
 \maketitle
 
-Ciaran has a set of SAR tools he is maintaining using a Github source code repository; [LINK] Here’s how you can get that code for your own use, make any changes you feel are needed and share it with anyone else who would require it.
+\begin{wrapbox}
+If you're not familiar with using a terminal to navigate, all you need for this session are the following commands: \verb|$cd [folder]| will move you into [folder]; \verb|$cd ..| will move you up to the parent folder; \verb|$ls| will show files in the current folder; and \verb|$mkdir [name]| will create a new directory called [name].
+\end{wrapbox}
+
+Ciaran has a set of SAR tools he is maintaining using a Github source code repository; [LINK] Here's how you can get that code for your own use, make any changes you feel are needed and share it with anyone else who would require it.
 
 \underline{What is Git?}
 
-Git is a way of managing and keeping track of a piece of software’s history – who made what change when. It is also a way combining code from multiple developers together into a single piece of software, while still keeping track of who did what.
+Git is a way of managing and keeping track of a piece of software's history -- who made what change when. It is also a way combining code from multiple developers together into a single piece of software, while still keeping track of who did what.
+
+
 
 \underline{Installing Git}
 
-If you're on Windows, then you can install Git for Windows via the University’s Program Installer. If you're on an Ubuntu or other Linux machine, then Git is usually pre-installed. If not, then you can install it with
+If you're on Windows, then you can install Git for Windows via the University's Program Installer. If you're on an Ubuntu or other Linux machine, then Git is usually pre-installed. If not, then you can install it with
 
 \begin{verbatim}
 $ sudo apt-get install git-all
@@ -59,11 +65,7 @@ $ sudo apt-get install git-all
 on the command line.
 
 \begin{wrapbox}
-From here out, it’s assuming that you are using a standard Bash terminal for navigation. If you are on Windows, a good enough emulation comes with Git for Windows; just type ‘Git Bash’ into the search bar.
-\end{wrapbox}
-
-\begin{wrapbox}
-If you’re not familiar with using a terminal to navigate, all you need for this session are the following commands: \verb|$cd [folder]| will move you into [folder]; \verb|$cd ..| will move you up to the parent folder; \verb|$ls| will show files in the current folder; and \verb|mkdir [name]| will create a new directory called [name].
+From here out, it's assuming that you are using a standard Bash terminal for navigation. If you are on Windows, a good enough emulation comes with Git for Windows; just type 'Git Bash' into the search bar.
 \end{wrapbox}
 
 \underline{Getting the code}
@@ -76,22 +78,22 @@ $git clone [LINK]
 
 \end{verbatim}
 
-This is now the \textbf{root} of your local repository – as far as Git is concerned, everything is relative to this point.
+This is now the \textbf{root} of your local repository -- as far as Git is concerned, everything is relative to this point.
 
 \missingfigure{diagram of clone}
 
 \underline{What is happening here}
 
-This will copy all of Ciaran’s code from Github to your machine into a \textbf{local repository}, complete with the history and branches [see later] of his project right to the beginning – you can view this with the command \verb|$ git log|. Press ‘q’ to exit the log viewer.
+This will copy all of Ciaran's code from Github to your machine into a \textbf{local repository}, complete with the history and branches [see later] of his project right to the beginning -- you can view this with the command \verb|$ git log|. Press 'q' to exit the log viewer.
 
 \underline{Why do this?}
 
-As well as getting the entire project’s codebase, when you cloned the repository with \verb|$ git clone|, you also cloned its history and configuration. This means that you can:
+As well as getting the entire project's codebase, when you cloned the repository with \verb|$ git clone|, you also cloned its history and configuration. This means that you can:
 
 \begin{itemize}
 \item Keep it up to date with any revisions Ciaran might make in the future
 \item Review any changes he might have made in the past, and understand why he made those changes.
-\item If you make a huge, unfixable mistake, or if the code was working last Tuesday and isn’t now, you can roll the entire project back to a point where everything was working
+\item If you make a huge, unfixable mistake, or if the code was working last Tuesday and isn't now, you can roll the entire project back to a point where everything was working
 \item Fix any bugs or glitches you might find
 \item Add any further features that you think the code might need, and share those features with anyone else.
 \end{itemize}
@@ -112,10 +114,10 @@ You should now see a short summary of what has been changed; you can get more in
 
 Before you go any further in this tutorial, you will need to go to www.github.com and register an account.
 
-Let’s say you wanted to add a function to Ciaran’s codebase. You’ve written the script – let’s call it [newthing] – in a file of its own (\verb|newthing.py|), and now you want to add it to Ciaran’s repository so everyone else can use it. This process has a few steps.
+Let's say you wanted to add a function to Ciaran's codebase. You've written the script -- let's call it [newthing] -- in a file of its own (\verb|newthing.py|), and now you want to add it to Ciaran's repository so everyone else can use it. This process has a few steps.
 
 \begin{enumerate}
-\item Put newthing.py in a sensible place in your local repository using a file manager. You can check it’s there with \verb|$git status|
+\item Put newthing.py in a sensible place in your local repository using a file manager. You can check it's there with \verb|$git status|
 As you might gather from the status message, Git does not know that you want to add newthing.py to the repository.
 \item Use the command
 \begin{verbatim}
@@ -127,32 +129,32 @@ This adds newthing.py to your staging area. This is where any changes you make a
 
 \item Commit the changes to your local repository with the command
 \begin{verbatim}
-$git commit –m "some informative message here"
+$git commit --m "some informative message here"
 \end{verbatim}
-The message you write in here is what will appear when anyone runs “git log”, so make sure it’s informative and clean(ish)
-\begin{wrapbox} 
-If you forget the –m option, by default Git will open vim; a powerful but non-intuitive text editor. To exit Vim, press ‘esc’ then type ‘:q!’ without the quotes. If you want to \textit{learn} Vim, clear an hour in your schedule and run \verb|vimtutor| from the command line.
+The message you write in here is what will appear when anyone runs \verb|$ git log|, so make sure it's informative and clean(ish)
+\begin{wrapbox}
+If you forget the --m option, by default Git will open vim; a powerful but non-intuitive text editor. To exit Vim, press 'esc' then type ':q!' without the quotes. If you want to \textit{learn} Vim, clear an hour in your schedule and run \verb|vimtutor| from the command line.
 \end{wrapbox}
-\begin{wrapbox}\underline{When to commit:} “Early and often” is the mantra from the community; the smaller each commit is, the more powerful the ‘time-travel’ tools become. Find a commit pace that works for you, but if in doubt more often is usually better.
+\begin{wrapbox} \underline{When to commit:} “Early and often” is the mantra from the community; the smaller each commit is, the more powerful the 'time-travel' tools become. Find a commit pace that works for you, but if in doubt more often is usually better.
 \end{wrapbox}
 This commits snapshots of your code to your local repository; 
-\item Continue to edit and \verb|git commit| your code, using [add] to add new files as required. Bear in mind none of these changes will go to Ciaran’s repository yet.
-\item Once you are happy with your new feature and are reasonably sure that it doesn’t break anything else, use the command
+\item Continue to edit and \verb|$ git commit| your code, using [add] to add new files as required. Bear in mind none of these changes will go to Ciaran's repository yet.
+\item Once you are happy with your new feature and are reasonably sure that it doesn't break anything else, use the command
 \begin{verbatim}
 $git push
 \end{verbatim}
-to put your changes into Cieron’s repository. You might be prompted for your Github username and password here.
+to put your changes into Cieron's repository. You might be prompted for your Github username and password here.
 \end{enumerate}
 
-\begin{wrapbox} 
-When you're doing a large commit (such as adding a new feature to a repo), it’s good to write a longer commit message using a text editor – the default is Vim, but you can change this using the command git config –global core.editor [editor]. For a quick guide to writing useful commit messages, see \url{https://chris.beams.io/posts/git-commit/}.
+\begin{wrapbox}
+When you're doing a large commit (such as adding a new feature to a repo), it's good to write a longer commit message using a text editor -- the default is Vim, but you can change this using the command git config --global core.editor [editor]. For a quick guide to writing useful commit messages, see \url{https://chris.beams.io/posts/git-commit/}.
 \end{wrapbox}
 
 \underline{Branching}
 
-It is a sad fact that when working on improving a piece of code, you will almost certainly break it or something else instead. To avoid this and the associated recriminations, Git allows you to make local timelines of the project that you can mess around with as you please, without affecting anyone else’s work. These local timelines are called ‘branches’.
+It is a sad fact that when working on improving a piece of code, you will almost certainly break it or something else instead. To avoid this and the associated recriminations, Git allows you to make local timelines of the project that you can mess around with as you please, without affecting anyone else's work. These local timelines are called 'branches'.
 
-By convention, each Git repository starts with a branch called ‘master’. Once the initial code repository is written, this is usually the 'this code works' branch – anyone wanting to use Cieran’s tools will use the code stored in ‘master’. 
+By convention, each Git repository starts with a branch called 'master'. Once the initial code repository is written, this is usually the 'this code works' branch -- anyone wanting to use Cieran's tools will use the code stored in 'master'. 
 
 \textbf{It is good practice whenever you are writing a new feature to create a branch to develop it in.} This way, others can still use the original version of the program and also contribute to your improved version, and you can test your new features without having to worry about breaking the software for everyone.
 
@@ -170,14 +172,14 @@ $git checkout [branchname]
 
 to start work in the new branch. As long as you have commited your work, you can move between branches with the \verb|$git checkout| command and see the difference between them with \verb|$git diff [branch1] [branch2]|.
 
-This branch is in your \textbf{local repository}. If you \verb|$ git push| while you’re working in a branch, Git will add that branch to the \textbf{remote repository} for others to access.
+This branch is in your \textbf{local repository}. If you \verb|$ git push| while you're working in a branch, Git will add that branch to the \textbf{remote repository} for others to access.
 
 \underline{Merging}
 
 Merging is when you take the changes made in one branch and apply them to another branch. Git is very smart about this, and changes are done more or less line-by-line - even if two people are working on different parts of the same file in different branches, Git can collate those changes without user input (but see the next section). There are two situations where you need to merge regularly;
 
 \begin{itemize}
-\item \underline{When you have finished work on a branch:} You will want to merge your shiny new feature into the ‘master’ branch, so everyone can use it. To do this, first make sure you have \verb|$ git commit| -ed your changes to your branch. Then, move to the ‘master’ branch using
+\item \underline{When you have finished work on a branch:} You will want to merge your shiny new feature into the 'master' branch, so everyone can use it. To do this, first make sure you have \verb|$ git commit| -ed your changes to your branch. Then, move to the 'master' branch using
 \begin{verbatim}
 $git checkout master
 \end{verbatim}
@@ -188,7 +190,7 @@ $ git merge [branchname]
 
 This will bring the changes out have made in [branchname] into the 'master' branch; you can then push that branch to the remote repository using \verb|$ git push|.
 
-\item \underline{Someone else has made a change to ‘master’ while you are working on your branch:} you will want to make sure that this new change does not affect your work. Therefore, you will want to merge the changes made in ‘master’ with your own branch.
+\item \underline{Someone else has made a change to 'master' while you are working on your branch:} you will want to make sure that this new change does not affect your work. Therefore, you will want to merge the changes made in 'master' with your own branch.
 To do this, first you will need to pull the changes from the remote repository to your local repository. Make sure you are in [branchname] using \verb|git status|, then use:
 \begin{verbatim}
 $git fetch origin master
@@ -202,17 +204,17 @@ to bring the changes into [branchname].
 
 \underline{Conflicts}
 
-It can happen that two people working on the same repository both change the same part of the same file in different branches. When this happens, Git does not know how to combine the two files - this is a \textbf{merge conflict}, and it will cause the merge to fail. Git can’t solve this on its own; you will have to talk it over and decide which revision to keep, how to reconcile the conflict, ect. Them make the edits and commit as normal.
+It can happen that two people working on the same repository both change the same part of the same file in different branches. When this happens, Git does not know how to combine the two files - this is a \textbf{merge conflict}, and it will cause the merge to fail. Git can't solve this on its own; you will have to talk it over and decide which revision to keep, how to reconcile the conflict, ect. Them make the edits and commit as normal.
 
 \underline{Rolling back}
 
-The final basic trick that Git provides is rolling back. Think of this a time-machine for your project; you can jump back to any point in the project’s history that was \verb|$git commit| -ed. As a rule, any piece of work that was committed is recoverable \textit{somehow}; it is quite difficult to permanently lose work with Git. If you have lost some work that you’ve committed, talk to the repo administrator – they can probably get it back for you.
+The final basic trick that Git provides is rolling back. Think of this a time-machine for your project; you can jump back to any point in the project's history that was \verb|$git commit| -ed. As a rule, any piece of work that was committed is recoverable \textit{somehow}; it is quite difficult to permanently lose work with Git. If you have lost some work that you've committed, talk to the repo administrator -- they can probably get it back for you.
 
 You might have noticed so far that each commit has a long string of meaningless numbers and letters associated with it; this is that commit's \textbf{hash}. Any time you need to refer to a given commit, you can use \textbf{the first four characters} of it's hash.
 
 \underline{Rolling individual files back to the last checkout}
 
-If you’ve made some changes to a file since your last commit and want to restore it to its original state
+If you've made some changes to a file since your last commit and want to restore it to its original state
 \begin{verbatim}
 $git checkout -- [filename]
 \end{verbatim}
@@ -241,7 +243,7 @@ If you wish to undo a specific commit;
 \begin{verbatim}
 $git revert [hash of commit]
 \end{verbatim}
-This will create a new commit that removes the effects of the old commit – this has the same effect as you going over each of the changes from the old commit one-by-one and putting them back the way they were, but with far less effort.
+This will create a new commit that removes the effects of the old commit -- this has the same effect as you going over each of the changes from the old commit one-by-one and putting them back the way they were, but with far less effort.
 NOTE: This does not work back through the history; it only undoes the changes made by \textbf{that specific commit}. If you want to know more, Git has a more sophisticated way of defining ranges of commits: \url{see https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection}.
 
 \underline{GUI-based Git}
@@ -261,7 +263,7 @@ As mentioned above, I also recommend you read \url{https://chris.beams.io/posts/
 \begin{itemize}
 \item Always \verb|$ git commit| before you \verb|$git pull|
 \item Always \verb|$ git pull| before you \verb|$git push|
-\item Never use any command with --force unless you’re \textit{absolutely sure} you know what you are doing. Even if the Internet says otherwise.
+\item Never use any command with --force unless you're \textit{absolutely sure} you know what you are doing. Even if the Internet says otherwise.
 \end{itemize}
 
 \underline{Quick reference table}
